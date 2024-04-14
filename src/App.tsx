@@ -118,7 +118,7 @@ const App: React.FC = () => {
               </IonMenuToggle>
 
               <IonMenuToggle>
-                <IonItem routerLink="/login">
+                <IonItem>
                   <IonIcon slot="start" icon={arrowBack} />
                   <IonLabel>Exit</IonLabel>
                 </IonItem>
