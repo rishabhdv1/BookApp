@@ -25,8 +25,9 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import Login from './pages/Login';
-import Tab3 from './pages/Tab3';
+import Tab3 from './pages/Devotional';
 import Details from './pages/Details';
+import Devotional from './pages/Devotional';
 
 setupIonicReact();
 
@@ -139,10 +140,7 @@ const App: React.FC = () => {
               <Tab1 />
             </Route>
             <Route exact path="/tab2">
-              <Tab2 />
-            </Route>
-            <Route exact path="/tab3">
-              <Tab3 />
+              <Devotional />
             </Route>
             <Route exact path="/details/:devotionalName">
               <Details />
@@ -156,12 +154,9 @@ const App: React.FC = () => {
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
             <IonTabButton tab="tab1" href="/tab1">
-              <IonLabel style={{fontSize:"1.8em"}}>Sites</IonLabel>
+              <IonLabel style={{fontSize:"1.8em"}}>Popular Sites</IonLabel>
             </IonTabButton>
             <IonTabButton tab="tab2" href="/tab2">
-              <IonLabel style={{fontSize:"1.8em"}}>Category</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="tab3" href="/tab3">
               <IonLabel style={{fontSize:"1.8em"}}>Devotional</IonLabel>
             </IonTabButton>
           </IonTabBar>
