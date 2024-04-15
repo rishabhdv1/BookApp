@@ -5,7 +5,7 @@ const TabBar: React.FC = () => {
     return (
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/tab1">
-            <IonLabel style={{fontSize:"2em"}}>Popular Sites</IonLabel>
+            <IonLabel style={{fontSize:"2em"}}>Websites</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab2" href="/tab2">
             <IonLabel style={{fontSize:"2em"}}>Devotional</IonLabel>

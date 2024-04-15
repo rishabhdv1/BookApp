@@ -3,7 +3,7 @@ import { Redirect, Route } from 'react-router-dom';
 import {  IonApp, IonIcon, IonLabel,  IonRouterOutlet,  IonTabBar,  IonTabButton, IonTabs, IonMenu, IonHeader, IonToolbar,  IonTitle, IonContent,  IonList,  IonItem,  IonMenuToggle,  setupIonicReact, IonToggle, ToggleCustomEvent } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { arrowBack, browsers, ellipse, home, information, informationCircle, logIn, moon, shareSocial, square, star, sunny, triangle } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
+import Tab1 from './pages/PopularSites';
 import Tab2 from './pages/Tab2';
 
 /* Core CSS required for Ionic components to work properly */
@@ -87,27 +87,21 @@ const App: React.FC = () => {
                 </IonItem>
               </IonMenuToggle>
               <IonMenuToggle>
-                <IonItem routerLink="/tab2">
+                <IonItem>
                   <IonIcon slot="start" icon={informationCircle} />
                   <IonLabel>How to Use ?</IonLabel>
                 </IonItem>
               </IonMenuToggle>
               <IonMenuToggle>
-                <IonItem routerLink="/tab3">
+                <IonItem>
                   <IonIcon slot="start" icon={browsers} />
                   <IonLabel>Open into browser</IonLabel>
                 </IonItem>
               </IonMenuToggle>
               <IonMenuToggle>
-                <IonItem routerLink="/">
+                <IonItem>
                   <IonIcon slot="start" icon={shareSocial} />
                   <IonLabel>Share</IonLabel>
-                </IonItem>
-              </IonMenuToggle>
-              <IonMenuToggle>
-                <IonItem routerLink="/">
-                  <IonIcon slot="start" icon={star} />
-                  <IonLabel>Rate</IonLabel>
                 </IonItem>
               </IonMenuToggle>
               <IonMenuToggle>
@@ -117,15 +111,8 @@ const App: React.FC = () => {
                   <IonToggle checked={themeToggle}></IonToggle>
                 </IonItem>
               </IonMenuToggle>
-
               <IonMenuToggle>
                 <IonItem>
-                  <IonIcon slot="start" icon={arrowBack} />
-                  <IonLabel>Exit</IonLabel>
-                </IonItem>
-              </IonMenuToggle>
-              <IonMenuToggle>
-                <IonItem routerLink="">
                   <IonLabel>Privacy Policy</IonLabel>
                 </IonItem>
               </IonMenuToggle>

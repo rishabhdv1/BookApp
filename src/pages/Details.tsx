@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { IonContent, IonList, IonPage } from '@ionic/react';
 import { useParams } from 'react-router';
 import Header from '../components/Header';
+import Common from '../components/Common';
 
 type DevotionalDetails = {
   [key: string]: string;
@@ -771,7 +772,7 @@ const Details: React.FC = () => {
   return (
     <IonPage>
         <Header title={"RBook"} /> {/* devotionalName */}
-        <IonContent>
+        <Common>
             {mantra ? (
             <IonList className="ion-text-center">
                 {renderParagraphs(mantra)}
@@ -779,7 +780,7 @@ const Details: React.FC = () => {
             ) : (
             <div>Loading...</div>
             )}
-        </IonContent>
+        </Common>
     </IonPage>
   );
 };

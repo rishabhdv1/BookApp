@@ -2,6 +2,7 @@ import { IonActionSheet, IonButton, IonCol, IonContent, IonItem, IonList, IonPag
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import TabBar from '../components/TabBar';
+import Common from '../components/Common';
 
 const Devotional: React.FC = () => {
   const [searchText, setSearchText] = useState('');
@@ -39,8 +40,8 @@ const Devotional: React.FC = () => {
   
   return (
     <IonPage>
-        <Header title="Devotional" />
-      <IonContent>
+      <Header title="Devotional" />
+      <Common>
         <IonList style={{position:"sticky",top:"0",zIndex:"1"}}>
           <IonRow className="ion-align-items-center">
             <IonCol size="8">
@@ -130,7 +131,7 @@ const Devotional: React.FC = () => {
             </IonRouterLink>
           ))}
         </IonList>
-      </IonContent>
+      </Common>
       <TabBar />
     </IonPage>
   );

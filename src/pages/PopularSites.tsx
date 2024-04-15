@@ -3,6 +3,7 @@ import './Tab1.css';
 import { book } from 'ionicons/icons';
 import Header from '../components/Header';
 import TabBar from '../components/TabBar';
+import Common from '../components/Common';
 
 const Tab1: React.FC = () => {
   const Data = [
@@ -19,7 +20,7 @@ const Tab1: React.FC = () => {
   ];
   const Data2 = [
     { id: 1, title: "Art", link: "https://www.pdfdrive.com/category/1" },
-    { id: 2, title: "Trending Ebooks About Environment *", link: "https://www.pdfdrive.com/category/2" },
+    { id: 2, title: "Trending Ebooks About Environment", link: "https://www.pdfdrive.com/category/2" },
     { id: 3, title: "Business Carrer", link: "https://www.pdfdrive.com/category/3" },
     { id: 4, title: "Self Growth", link: "https://www.pdfdrive.com/category/4" },
     { id: 5, title: "Technology", link: "https://www.pdfdrive.com/category/5" },
@@ -50,7 +51,7 @@ const Tab1: React.FC = () => {
   return (
     <IonPage>
       <Header title="Popular Sites" />
-      <IonContent>
+      <Common>
         <IonRow>
           {Data.map((card:any) => (
             <IonCol size="6">
@@ -60,7 +61,9 @@ const Tab1: React.FC = () => {
                     <IonIcon size="large" icon={book} />
                   </IonCol>
                   <IonCol size="12">
-                    <IonLabel>{card.title}</IonLabel>
+                    <IonLabel>
+                      <span style={{overflowX:"auto",whiteSpace:"nowrap"}}>{card.title}</span>
+                    </IonLabel>
                   </IonCol>
                 </IonRow>
               </IonCard>
@@ -70,10 +73,6 @@ const Tab1: React.FC = () => {
         <IonList style={{position:"sticky",top:"0",zIndex:"1",textAlign:"center"}}>
           <h2>CATEGORY</h2>
         </IonList>
-        <IonRow className="ion-text-center" >
-          <IonCol size="12">
-          </IonCol>
-        </IonRow>
         <IonList>
           {Data2.map((card:any) => (
             <IonItem href={card.link}>
@@ -82,7 +81,7 @@ const Tab1: React.FC = () => {
             </IonItem>
           ))}
         </IonList>
-      </IonContent>
+      </Common>
       <TabBar />
     </IonPage>
   );
