@@ -70,14 +70,14 @@ const Devotional: React.FC = () => {
               text: 'Shri Ram',
               handler: () => handleGodSelection('Shri Ram')
             },
-            {
+            /* {
               text: 'Shri Vishnu Ji *'
-            },
+            }, */
             {
               text: 'Hanuman Ji',
               handler: () => handleGodSelection('Hanuman Ji')
             },
-            {
+            /* {
               text: 'Shiv JI *'
             },
             {
@@ -115,7 +115,7 @@ const Devotional: React.FC = () => {
             },
             {
               text: 'Shri Bhairav Ji *'
-            },
+            }, */
           ]}
           onDidDismiss={() => setIsOpen(false)}
         ></IonActionSheet>
