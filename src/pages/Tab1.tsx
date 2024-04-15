@@ -2,6 +2,7 @@ import { IonCard, IonCol, IonContent, IonIcon, IonItem, IonLabel, IonList, IonPa
 import './Tab1.css';
 import { book } from 'ionicons/icons';
 import Header from '../components/Header';
+import TabBar from '../components/TabBar';
 
 const Tab1: React.FC = () => {
   const Data = [
@@ -82,6 +83,7 @@ const Tab1: React.FC = () => {
           ))}
         </IonList>
       </IonContent>
+      <TabBar />
     </IonPage>
   );
 };

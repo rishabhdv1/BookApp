@@ -1,6 +1,7 @@
 import { IonActionSheet, IonButton, IonCol, IonContent, IonItem, IonList, IonPage, IonRouterLink, IonRow, IonSearchbar } from '@ionic/react';
 import React, { useState } from 'react';
 import Header from '../components/Header';
+import TabBar from '../components/TabBar';
 
 const Devotional: React.FC = () => {
   const [searchText, setSearchText] = useState('');
@@ -130,6 +131,7 @@ const Devotional: React.FC = () => {
           ))}
         </IonList>
       </IonContent>
+      <TabBar />
     </IonPage>
   );
 };

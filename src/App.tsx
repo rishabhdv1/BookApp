@@ -133,34 +133,23 @@ const App: React.FC = () => {
           </IonContent>
         </IonMenu>
 
-
-        <IonTabs>
-          <IonRouterOutlet id="main">
-            <Route exact path="/tab1">
-              <Tab1 />
-            </Route>
-            <Route exact path="/tab2">
-              <Devotional />
-            </Route>
-            <Route exact path="/details/:devotionalName">
-              <Details />
-            </Route>
-            <Route exact path="/">
-              <Redirect to="/tab1" />
-            </Route>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-          </IonRouterOutlet>
-          <IonTabBar slot="bottom">
-            <IonTabButton tab="tab1" href="/tab1">
-              <IonLabel style={{fontSize:"1.8em"}}>Popular Sites</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="tab2" href="/tab2">
-              <IonLabel style={{fontSize:"1.8em"}}>Devotional</IonLabel>
-            </IonTabButton>
-          </IonTabBar>
-        </IonTabs>
+        <IonRouterOutlet id="main">
+          <Route exact path="/tab1">
+            <Tab1 />
+          </Route>
+          <Route exact path="/tab2">
+            <Devotional />
+          </Route>
+          <Route exact path="/details/:devotionalName">
+            <Details />
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/tab1" />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+        </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>
   )
