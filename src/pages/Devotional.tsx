@@ -40,26 +40,26 @@ const Devotional: React.FC = () => {
     <IonPage>
         <Header title="Devotional" />
       <IonContent>
-      <IonRow className="ion-align-items-center">
-        <IonCol size="8">
-          <IonSearchbar value={searchText} onIonInput={handleSearchTextChange} />
-        </IonCol>
-        <IonCol size="4">
-          <IonButton expand="block" onClick={() => setIsOpen(true)}>
-            {selectedGod !== 'All' ? `${selectedGod}` : 'All'}
-          </IonButton>
-        </IonCol>
-      </IonRow>
-      <IonActionSheet
+        <IonList style={{position:"sticky",top:"0",zIndex:"1"}}>
+          <IonRow className="ion-align-items-center">
+            <IonCol size="8">
+              <IonSearchbar value={searchText} onIonInput={handleSearchTextChange} />
+            </IonCol>
+            <IonCol size="4">
+              <IonButton expand="block" color="light" onClick={() => setIsOpen(true)}>
+                <span style={{padding:"6px"}}>
+                  {selectedGod !== 'All' ? `${selectedGod}` : 'All'}
+                </span>
+              </IonButton>
+            </IonCol>
+          </IonRow>
+        </IonList>
+        <IonActionSheet
           isOpen={isOpen}
           buttons={[
             {
               text: 'All',
               handler: () => handleGodSelection('All')
-            },
-            {
-              text: 'Hanuman Ji',
-              handler: () => handleGodSelection('Hanuman Ji')
             },
             {
               text: 'Ganesh Ji',
@@ -68,6 +68,52 @@ const Devotional: React.FC = () => {
             {
               text: 'Shri Ram',
               handler: () => handleGodSelection('Shri Ram')
+            },
+            {
+              text: 'Shri Vishnu Ji *'
+            },
+            {
+              text: 'Hanuman Ji',
+              handler: () => handleGodSelection('Hanuman Ji')
+            },
+            {
+              text: 'Shiv JI *'
+            },
+            {
+              text: 'Laxmi Ji *'
+            },
+            {
+              text: 'Shri Amba (Durga) Mata *'
+            },
+            {
+              text: 'Shri Krishna *'
+            },
+            {
+              text: 'Shri Swaminarayana *'
+            },
+            {
+              text: 'Shri Gayatri Ji *'
+            },
+            {
+              text: 'Shri Kaali Mata *'
+            },
+            {
+              text: 'Shri Ganga Mata *'
+            },
+            {
+              text: 'Shri Saraswati Ji *'
+            },
+            {
+              text: 'Shri Santoshi Maa *'
+            },
+            {
+              text: 'Shri SatyaNarayan JI *'
+            },
+            {
+              text: 'Shri Shani Dev *'
+            },
+            {
+              text: 'Shri Bhairav Ji *'
             },
           ]}
           onDidDismiss={() => setIsOpen(false)}

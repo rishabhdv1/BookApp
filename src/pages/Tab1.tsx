@@ -66,9 +66,11 @@ const Tab1: React.FC = () => {
             </IonCol>
           ))}
         </IonRow>
-        <IonRow className="ion-text-center" style={{position:"sticky",top:"0",zIndex:"1",background:"#333"}}>
+        <IonList style={{position:"sticky",top:"0",zIndex:"1",textAlign:"center"}}>
+          <h2>CATEGORY</h2>
+        </IonList>
+        <IonRow className="ion-text-center" >
           <IonCol size="12">
-            <h2>Category</h2>
           </IonCol>
         </IonRow>
         <IonList>
