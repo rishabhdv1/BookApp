@@ -1,26 +1,26 @@
-import { IonActionSheet, IonButton, IonCol, IonContent, IonItem, IonList, IonPage, IonRouterLink, IonRow, IonSearchbar } from '@ionic/react';
-import React, { useState } from 'react';
+import { IonActionSheet, IonButton, IonCol, IonContent, IonIcon, IonItem, IonList, IonPage, IonRouterLink, IonRow, IonSearchbar, IonToolbar } from '@ionic/react';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import TabBar from '../components/TabBar';
 import Common from '../components/Common';
+import { heart, heartOutline } from 'ionicons/icons';
 
 const Devotional: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [favorites, setFavorites] = useState<string[]>([]);
   const [selectedGod, setSelectedGod] = useState<string>('All');
-  const [selectedState, setSelectedState] = useState<string>('All');
-  const [selectedCapital, setSelectedCapital] = useState<string>('All');
   const [Details, setDetails] = useState([
-    { mantra: "Hanuman Chalisa", god: "Hanuman Ji" },
-    { mantra: "Gayatri Mantra", god: "" },
-    { mantra: "Shri Ganpati Atharvashirsha", god: "Ganesh Ji" },
-    { mantra: "Shri Ramrksha stotra", god: "Shri Ram" },
-    { mantra: "Maruti stotra", god: "Hanuman Ji" },
-    { mantra: "Madhurashtakam", god: "" },
-    { mantra: "Shri Ram Stuti", god: "Shri Ram" },
-    { mantra: "Bajrang Baan", god: "Hanuman Ji" },
-    { mantra: "Hanuman Ji Aarti", god: "Hanuman Ji" },
-    { mantra: "Sankat Mochan Hanumanashtak", god: "Hanuman Ji" },
+    { id: 1, mantra: "Hanuman Chalisa", god: "Hanuman Ji" },
+    { id: 2, mantra: "Gayatri Mantra", god: "" },
+    { id: 3, mantra: "Shri Ganpati Atharvashirsha", god: "Ganesh Ji" },
+    { id: 4, mantra: "Shri Ramrksha stotra", god: "Shri Ram" },
+    { id: 5, mantra: "Maruti stotra", god: "Hanuman Ji" },
+    { id: 6, mantra: "Madhurashtakam", god: "" },
+    { id: 7, mantra: "Shri Ram Stuti", god: "Shri Ram" },
+    { id: 8, mantra: "Bajrang Baan", god: "Hanuman Ji" },
+    { id: 9, mantra: "Hanuman Ji Aarti", god: "Hanuman Ji" },
+    { id: 10, mantra: "Sankat Mochan Hanumanashtak", god: "Hanuman Ji" },
   ]);
 
   const handleSearchTextChange = (e: CustomEvent) => {
@@ -38,6 +38,38 @@ const Devotional: React.FC = () => {
     return godMatch && searchTextMatch;
   }).sort((a, b) => a.mantra.localeCompare(b.mantra));
   
+
+  // Load favorites from local storage when component mounts
+  useEffect(() => {
+    const storedFavorites = localStorage.getItem('favorites');
+    if (storedFavorites) {
+      setFavorites(JSON.parse(storedFavorites));
+    }
+  }, []);
+
+  const saveFavoritesToLocalStorage = (favorites: string[]) => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  };
+
+  const toggleFavorite = (id: number) => {
+    setFavorites(prevFavorites => {
+      const isFavorite = prevFavorites.includes(id.toString());
+      if (isFavorite) {
+        const updatedFavorites = prevFavorites.filter(itemId => itemId !== id.toString());
+        saveFavoritesToLocalStorage(updatedFavorites);
+        return updatedFavorites;
+      } else {
+        const updatedFavorites = [...prevFavorites, id.toString()];
+        saveFavoritesToLocalStorage(updatedFavorites);
+        return updatedFavorites;
+      }
+    });
+  };
+
+  const isFavorite = (id: number) => {
+    return favorites.includes(id.toString());
+  };
+
   return (
     <IonPage>
       <Header title="Devotional" />
@@ -117,18 +149,22 @@ const Devotional: React.FC = () => {
             {
               text: 'Shri Bhairav Ji *'
             }, */
+            
           ]}
           onDidDismiss={() => setIsOpen(false)}
         ></IonActionSheet>
         <IonList>
           {filteredDetails.map((entry: any, index: any) => (
-            <IonRouterLink href={`/details/${entry.mantra}`}>
-              <IonList key={index} lines="full">
-                <IonItem>
-                  <span slot="start">{entry.mantra}</span>
-                </IonItem>
-              </IonList>
-            </IonRouterLink>
+            <IonItem key={entry.id}>
+              <IonRouterLink href={`/details/${entry.mantra}`}>
+                <IonList key={index} lines="none">
+                  <IonItem>
+                    <span slot="start">{entry.mantra}</span>
+                  </IonItem>
+                </IonList>
+              </IonRouterLink>
+              <IonIcon slot="end" onClick={() => toggleFavorite(entry.id)} icon={isFavorite(entry.id) ? heart : heartOutline} color={isFavorite(entry.id) ? 'danger' : 'medium'} />
+            </IonItem>
           ))}
         </IonList>
       </Common>
