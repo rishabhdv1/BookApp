@@ -111,10 +111,10 @@ const App: React.FC = () => {
                 </IonItem>
               </IonMenuToggle>
               <IonMenuToggle>
-                <IonItem>
+                <IonItem onClick={toggleTheme}>
                 <IonIcon slot="start" icon={themeToggle ? moon : sunny} />
                   <IonLabel>Theme ( Light / Dark )</IonLabel>
-                  <IonToggle checked={themeToggle} onIonChange={toggleTheme}></IonToggle>
+                  <IonToggle checked={themeToggle}></IonToggle>
                 </IonItem>
               </IonMenuToggle>
 
