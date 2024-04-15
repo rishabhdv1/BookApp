@@ -1,90 +1,77 @@
-import { IonCol, IonContent, IonHeader, IonIcon, IonItem, IonList, IonMenuButton, IonPage, IonRouterLink, IonRow, IonSearchbar, IonSegment, IonSegmentButton, IonSelect, IonSelectOption, IonToolbar } from '@ionic/react';
+import { IonActionSheet, IonButton, IonCol, IonContent, IonItem, IonList, IonPage, IonRouterLink, IonRow, IonSearchbar } from '@ionic/react';
 import React, { useState } from 'react';
-import { personCircle } from 'ionicons/icons';
-import TabBar from '../components/TabBar';
 import Header from '../components/Header';
 
 const Devotional: React.FC = () => {
   const [searchText, setSearchText] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedGod, setSelectedGod] = useState<string>('All');
   const [selectedState, setSelectedState] = useState<string>('All');
   const [selectedCapital, setSelectedCapital] = useState<string>('All');
   const [Details, setDetails] = useState([
-    { mantra: "Hanuman Chalisa" },
-    { mantra: "Gayatri Mantra" },
-    { mantra: "Shri Ganpati Atharvashirsha" },
-    { mantra: "Shri Ramrksha stotra" },
-    { mantra: "Maruti stotra" },
-    { mantra: "Madhurashtakam" },
-    { mantra: "Shri Ram Stuti" },
-    { mantra: "Bajrang Baan" },
-    { mantra: "Hanuman Ji Aarti" },
+    { mantra: "Hanuman Chalisa", god: "Hanuman Ji" },
+    { mantra: "Gayatri Mantra", god: "" },
+    { mantra: "Shri Ganpati Atharvashirsha", god: "Ganesh Ji" },
+    { mantra: "Shri Ramrksha stotra", god: "Shri Ram" },
+    { mantra: "Maruti stotra", god: "Hanuman Ji" },
+    { mantra: "Madhurashtakam", god: "" },
+    { mantra: "Shri Ram Stuti", god: "Shri Ram" },
+    { mantra: "Bajrang Baan", god: "Hanuman Ji" },
+    { mantra: "Hanuman Ji Aarti", god: "Hanuman Ji" },
+    { mantra: "Sankat Mochan Hanumanashtak", god: "Hanuman Ji" },
   ]);
-
-  const stateCities: { [key: string]: string[] } = {
-    "Hanuman Ji": [],
-    "Ganesh Ji": []
-  };
-
-  const handleStateChange = (e: CustomEvent) => {
-    setSelectedState(e.detail.value);
-    setSelectedCapital('All');
-    
-  };
-
-  const handleCityChange = (e: CustomEvent) => {
-    setSelectedCapital(e.detail.value);
-    console.log("City >>>",e.detail.value);
-    
-  };
 
   const handleSearchTextChange = (e: CustomEvent) => {
     setSearchText(e.detail.value);
   };
+  const handleGodSelection = (god: string) => {
+    setSelectedGod(god);
+    setIsOpen(false);
+  };
 
-  const filteredCities = selectedState !== 'All' ? stateCities[selectedState].filter(capital =>
-    capital.toLowerCase().includes(searchText.toLowerCase())
-  ) : Object.values(stateCities).flat().filter(capital =>
-    capital.toLowerCase().includes(searchText.toLowerCase())
-  );
-  /* const filteredDetails = Details.filter(entry =>
-    entry.state.toLowerCase().includes(searchText.toLowerCase())
-  ); */
   const filteredDetails = Details.filter(entry => {
-    const stateMatch = selectedState === 'All' || entry.mantra.toLowerCase() === selectedState.toLowerCase();
-    const capitalMatch = selectedCapital === 'All' || entry.capital.toLowerCase() === selectedCapital.toLowerCase();
+    const godMatch = selectedGod === 'All' || entry.god === selectedGod;
     const searchTextMatch = entry.mantra.toLowerCase().includes(searchText.toLowerCase());
   
-    return stateMatch && capitalMatch && searchTextMatch;
+    return godMatch && searchTextMatch;
   }).sort((a, b) => a.mantra.localeCompare(b.mantra));
   
   return (
     <IonPage>
         <Header title="Devotional" />
       <IonContent>
-        <IonSearchbar value={searchText} onIonInput={handleSearchTextChange} />
-        <div style={{position:"sticky",top:"0",zIndex:"10",backgroundColor:"#333"}}>
-          {/* <IonRow>
-            <IonCol size="6">
-              <IonSelect fill="outline" value={selectedState} onIonChange={handleStateChange} interface="popover" placeholder="Select State">
-                <IonSelectOption value="All">All</IonSelectOption>
-                  {Object.keys(stateCities).map((state, index) => (
-                    <IonSelectOption key={index} value={state}>{state}</IonSelectOption>
-                  ))}
-              </IonSelect>
-            </IonCol>
-            <IonCol size="6">
-              <IonSelect fill="outline" value={selectedCapital} onIonChange={handleCityChange} interface="popover" placeholder="Select City">
-                <IonSelectOption value="All">All</IonSelectOption>
-                  {selectedState !== 'All' && stateCities[selectedState].map((city, index) => (
-                    <IonSelectOption key={index} value={city}>{city}</IonSelectOption>
-                  ))}
-                  {selectedState === 'All' && filteredCities.map((city, index) => (
-                    <IonSelectOption key={index} value={city}>{city}</IonSelectOption>
-                  ))}
-              </IonSelect>
-            </IonCol>
-          </IonRow> */}
-        </div>
+      <IonRow className="ion-align-items-center">
+        <IonCol size="8">
+          <IonSearchbar value={searchText} onIonInput={handleSearchTextChange} />
+        </IonCol>
+        <IonCol size="4">
+          <IonButton expand="block" onClick={() => setIsOpen(true)}>
+            {selectedGod !== 'All' ? `${selectedGod}` : 'All'}
+          </IonButton>
+        </IonCol>
+      </IonRow>
+      <IonActionSheet
+          isOpen={isOpen}
+          buttons={[
+            {
+              text: 'All',
+              handler: () => handleGodSelection('All')
+            },
+            {
+              text: 'Hanuman Ji',
+              handler: () => handleGodSelection('Hanuman Ji')
+            },
+            {
+              text: 'Ganesh Ji',
+              handler: () => handleGodSelection('Ganesh Ji')
+            },
+            {
+              text: 'Shri Ram',
+              handler: () => handleGodSelection('Shri Ram')
+            },
+          ]}
+          onDidDismiss={() => setIsOpen(false)}
+        ></IonActionSheet>
         <IonList>
           {filteredDetails.map((entry: any, index: any) => (
             <IonRouterLink href={`/details/${entry.mantra}`}>
