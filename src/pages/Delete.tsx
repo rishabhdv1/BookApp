@@ -5,21 +5,12 @@ import TabBar from '../components/TabBar';
 import Common from '../components/Common';
 import { useState } from 'react';
 
-const Tab1: React.FC = () => {
+const Delete: React.FC = () => {
   const [showLinks, setShowLinks] = useState(false);
+  const storedLanguage = localStorage.getItem("lang") || "english";
+  const [selectedLanguage, setSelectedLanguage] = useState<string>(storedLanguage);
   const toggleLinks = () => setShowLinks(!showLinks);
-  const Data = [
-    { id: 1, title: "Free Books", description: "Description 1", link: "https://pdfdrive.com/category/113" },
-    { id: 2, title: "Libgen", description: "Description 2", link: "https://libgen.is" },
-    { id: 3, title: "Booksfi", description: "Description 3", link: "https://booksfi.net" },
-    { id: 4, title: "Open Library", description: "Description 4", link: "https://openlibrary.org" },
-    { id: 5, title: "Free Books", description: "Description 4", link: "https://pdfdrive.com" },
-    { id: 6, title: "Tantor AudioBook", description: "Description 4", link: "https://tantor.com" },
-    { id: 7, title: "Next Book Suggestion", description: "Description 4", link: "https://whatshouldireadnext.com" },
-    { id: 8, title: "Reading Time", description: "Description 4", link: "https://howlongtoread.com" },
-    { id: 9, title: "Librivox Audiobook", description: "Description 4", link: "https://librivox.org" },
-    { id: 10, title: "Epic Reads", description: "Description 4", link: "https://www.epicreads.com" },
-  ];
+
   const Data2 = [
     { id: 1, title: "Art", link: "https://www.pdfdrive.com/category/1" },
     { id: 2, title: "Trending Ebooks About Environment", link: "https://www.pdfdrive.com/category/2" },
@@ -46,35 +37,53 @@ const Tab1: React.FC = () => {
   ];
 
   const openWebpage = (link: string) => {
-    window.open(link); /* , '_blank' */
+    window.open(link);
   };
 
+  const handleLanguageChange = (e: any) => {
+    const selectedLang = e.detail.value;
+    setSelectedLanguage(e.detail.value);
+    localStorage.setItem("lang",e.detail.value);
+    window.location.reload();  
+  };
+
+  const languageStrings: { [key: string]: any } = {
+    english: {
+      referAndEarn: "Refer and Earn",
+      termsAndConditions: "Terms & Conditions",
+      language: "Language",
+      logout: "Logout"
+    },
+    hindi: {
+      referAndEarn: "रेफर और कमाएं",
+      termsAndConditions: "नियम और शर्तें",
+      language: "भाषा",
+      logout: "लॉग आउट"
+    },
+    marathi: {
+      referAndEarn: "संदर्भ द्या आणि कमावा",
+      termsAndConditions: "अटी आणि अटी",
+      language: "भाषा",
+      logout: "लॉग आउट"
+    },
+    gujarati: {
+      referAndEarn: "સૂચવો અને કમાવો",
+      termsAndConditions: "શરતો અને નિયમો",
+      language: "ભાષા",
+      logout: "લૉગ આઉટ"
+    },
+  };
+
+  function capitalizeFirstLetter(str:any) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  const strings = languageStrings[selectedLanguage] || languageStrings['english'];
 
   return (
     <IonPage>
       <Header title="Popular Sites" />
       <Common>
-        {! showLinks && (
-          <IonRow>
-            {Data.map((card:any) => (
-              <IonCol size="6">
-                <IonCard className="ion-padding" href={card.link}>
-                  <IonRow className="ion-text-center">
-                    <IonCol size="12">
-                      <IonIcon size="large" icon={book} />
-                    </IonCol>
-                    <IonCol size="12">
-                      <IonLabel>
-                        <span style={{overflowX:"auto",whiteSpace:"nowrap"}}>{card.title}</span>
-                      </IonLabel>
-                    </IonCol>
-                  </IonRow>
-                </IonCard>
-              </IonCol>
-            ))}
-          </IonRow>
-        )}
-
         <IonItem onClick={toggleLinks} style={{position:"sticky",top:"0",zIndex:"1",fontSize:"2em"}}>
           <IonIcon slot="start" icon={book} />
           <IonLabel>CATEGORIES</IonLabel>
@@ -86,6 +95,7 @@ const Tab1: React.FC = () => {
               <IonItem key={card.id} href={card.link}>
                 <IonIcon slot="start" size="large" icon={book} />
                 <IonLabel>{card.title}</IonLabel>
+                <span>{strings.language}</span>
               </IonItem>
             ))}
           </IonList>
@@ -96,4 +106,4 @@ const Tab1: React.FC = () => {
   );
 };
 
-export default Tab1;
+export default Delete;
