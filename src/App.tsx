@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import {  IonApp, IonIcon, IonLabel,  IonRouterOutlet,  IonTabBar,  IonTabButton, IonTabs, IonMenu, IonHeader, IonToolbar,  IonTitle, IonContent,  IonList,  IonItem,  IonMenuToggle,  setupIonicReact, IonToggle, ToggleCustomEvent, IonSelect, IonSelectOption } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { arrowBack, browsers, ellipse, home, information, informationCircle, logIn, moon, shareSocial, square, star, sunny, triangle } from 'ionicons/icons';
+import { arrowBack, browsers, ellipse, home, homeOutline, information, informationCircle, language, lockClosedOutline, logIn, moon, shareSocial, square, star, sunny, triangle } from 'ionicons/icons';
 import Tab1 from './pages/PopularSites';
 import Tab2 from './pages/Tab2';
 
@@ -83,6 +83,11 @@ const App: React.FC = () => {
 
   const languageStrings: { [key: string]: any } = {
     english: {
+      theme: "Theme (Light / Dark)",
+      privacyPolicy: "Privacy Policy",
+      openIntoBrowser: "Open into browser",
+      home: "Home",
+      howToUse: "How to use ?",
       referAndEarn: "Refer and Earn",
       termsAndConditions: "Terms & Conditions",
       receiveNotifications: "Receive Notifications",
@@ -91,6 +96,11 @@ const App: React.FC = () => {
     },
     // Add strings for other supported languages here
     hindi: {
+      theme: "थीम (लाइट / डार्क)",
+      privacyPolicy: "गोपनीयता नीति",
+      openIntoBrowser: "ब्राउज़र में खोलें",
+      home: "घर",
+      howToUse: "का उपयोग कैसे करें ?",
       referAndEarn: "रेफर और कमाएं",
       termsAndConditions: "नियम और शर्तें",
       receiveNotifications: "सूचनाएँ प्राप्त करें",
@@ -216,26 +226,26 @@ const App: React.FC = () => {
             <IonList>
               <IonMenuToggle>
                 <IonItem routerLink="/tab1">
-                  <IonIcon slot="start" icon={home} />
-                  <IonLabel>Home</IonLabel>
+                  <IonIcon slot="start" icon={homeOutline} />
+                  <IonLabel>{strings.home}</IonLabel>
                 </IonItem>
               </IonMenuToggle>
               <IonMenuToggle>
                 <IonItem routerLink="/delete">
-                  <IonIcon slot="start" icon={home} />
+                  <IonIcon slot="start" icon={homeOutline} />
                   <IonLabel>Home 2</IonLabel>
                 </IonItem>
               </IonMenuToggle>
               <IonMenuToggle>
                 <IonItem>
                   <IonIcon slot="start" icon={informationCircle} />
-                  <IonLabel>How to Use ?</IonLabel>
+                  <IonLabel>{strings.howToUse}</IonLabel>
                 </IonItem>
               </IonMenuToggle>
               <IonMenuToggle>
                 <IonItem>
                   <IonIcon slot="start" icon={browsers} />
-                  <IonLabel>Open into browser</IonLabel>
+                  <IonLabel>{strings.openIntoBrowser}</IonLabel>
                 </IonItem>
               </IonMenuToggle>
               <IonMenuToggle>
@@ -247,12 +257,13 @@ const App: React.FC = () => {
               <IonMenuToggle>
                 <IonItem onClick={toggleTheme}>
                 <IonIcon slot="start" icon={themeToggle ? moon : sunny} />
-                  <IonLabel>Theme ( Light / Dark )</IonLabel>
+                  <IonLabel>{strings.theme}</IonLabel>
                   <IonToggle checked={themeToggle}></IonToggle>
                 </IonItem>
               </IonMenuToggle>
               <IonMenuToggle autoHide={false}>
                 <IonItem>
+                  <IonIcon slot="start" icon={language} />
                   <IonSelect value={selectedLanguage} onIonChange={handleLanguageChange} label={strings.language} interface="action-sheet">
                     {Object.keys(languageStrings).map(lang => (
                       <IonSelectOption key={lang} value={lang}>{capitalizeFirstLetter(lang)}</IonSelectOption>
@@ -262,7 +273,8 @@ const App: React.FC = () => {
               </IonMenuToggle>
               <IonMenuToggle>
                 <IonItem>
-                  <IonLabel>Privacy Policy</IonLabel>
+                  <IonIcon slot="start" icon={lockClosedOutline} />
+                  <IonLabel>{strings.privacyPolicy}</IonLabel>
                 </IonItem>
               </IonMenuToggle>
             </IonList>

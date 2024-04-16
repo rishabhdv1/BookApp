@@ -121,19 +121,19 @@ const Devotional: React.FC = () => {
 
   const languageStrings: { [key: string]: any } = {
     english: {
+      devName: "Devotional",
+      all: "All",
       ContentName: "Refer and Earn",
       termsAndConditions: "Terms & Conditions",
-      receiveNotifications: "Receive Notifications",
       language: "Language",
-      logout: "Logout"
     },
     // Add strings for other supported languages here
     hindi: {
+      devName: "धार्मिक",
+      all: "सभी",
       ContentName: "रेफर और कमाएं",
       termsAndConditions: "नियम और शर्तें",
-      receiveNotifications: "सूचनाएँ प्राप्त करें",
       language: "भाषा",
-      logout: "लॉग आउट"
     },
     // Add strings for other languages
   };
@@ -146,7 +146,7 @@ const Devotional: React.FC = () => {
 
   return (
     <IonPage>
-      <Header title={strings.language} />
+      <Header title={strings.devName} />
       <IonContent>
         <IonRow className="ion-align-items-center">
           <IonCol size="8">
