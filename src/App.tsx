@@ -78,7 +78,7 @@ const App: React.FC = () => {
     setSelectedLanguage(e.detail.value);
     localStorage.setItem("lang",e.detail.value);
     window.location.reload();  
-};
+  };
 
 const languageStrings: { [key: string]: any } = {
   english: {

@@ -774,7 +774,7 @@ const Details: React.FC = () => {
         <Header title={"RBook"} /> {/* devotionalName */}
         <Common>
             {mantra ? (
-            <IonList className="ion-text-center">
+            <IonList className="ion-text-center" style={{fontSize:"1.15em"}}>
                 {renderParagraphs(mantra)}
             </IonList>
             ) : (
