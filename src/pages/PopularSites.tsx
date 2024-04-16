@@ -1,11 +1,13 @@
-import { IonCard, IonCol, IonContent, IonIcon, IonItem, IonLabel, IonList, IonPage, IonRow } from '@ionic/react';
-import './Tab1.css';
-import { book } from 'ionicons/icons';
+import { IonCard, IonCol, IonIcon, IonItem, IonLabel, IonList, IonPage, IonRow } from '@ionic/react';
+import { book, chevronDown, chevronUp } from 'ionicons/icons';
 import Header from '../components/Header';
 import TabBar from '../components/TabBar';
 import Common from '../components/Common';
+import { useState } from 'react';
 
 const Tab1: React.FC = () => {
+  const [showLinks, setShowLinks] = useState(false);
+  const toggleLinks = () => setShowLinks(!showLinks);
   const Data = [
     { id: 1, title: "Free Books", description: "Description 1", link: "https://pdfdrive.com/category/113" },
     { id: 2, title: "Libgen", description: "Description 2", link: "https://libgen.is" },
@@ -70,16 +72,23 @@ const Tab1: React.FC = () => {
             </IonCol>
           ))}
         </IonRow>
-        <IonList style={{position:"sticky",top:"0",zIndex:"1",textAlign:"center"}}>
-          <h2>CATEGORY</h2>
-        </IonList>
+
+        <IonItem style={{position:"sticky",top:"0",zIndex:"1",fontSize:"2em"}} href="https://www.pdfdrive.com/category/1">
+          <IonIcon slot="start" icon={book} />
+          <IonLabel>CATEGORIES</IonLabel>
+          <IonIcon slot="end" onClick={toggleLinks} icon={showLinks ? chevronUp : chevronDown} />
+        </IonItem>
         <IonList>
-          {Data2.map((card:any) => (
-            <IonItem href={card.link}>
+        {showLinks && (
+          <IonList>
+            {Data2.map((card: any) => (
+              <IonItem key={card.id} href={card.link}>
                 <IonIcon slot="start" size="large" icon={book} />
                 <IonLabel>{card.title}</IonLabel>
-            </IonItem>
-          ))}
+              </IonItem>
+            ))}
+          </IonList>
+        )}
         </IonList>
       </Common>
       <TabBar />
