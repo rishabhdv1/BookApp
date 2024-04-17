@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { IonActionSheet, IonButton, IonCol, IonContent, IonItem, IonList, IonPage, IonRouterLink, IonRow, IonSearchbar } from '@ionic/react';
 import Header from '../components/Header';
+import TabBar from '../components/TabBar';
+import Common from '../components/Common';
 
 const Devotional: React.FC = () => {
   const [searchText, setSearchText] = useState('');
@@ -14,70 +16,80 @@ const Devotional: React.FC = () => {
     {
       mantra: {
         english: "Hanuman Chalisa",
-        hindi: "हनुमान चालीसा"
+        hindi: "हनुमान चालीसा",
+        sankrit: "sans"
       },
       god: "Hanuman Ji"
     },
     {
       mantra: {
         english: "Gayatri Mantra",
-        hindi: "गायत्री मंत्र"
+        hindi: "गायत्री मंत्र",
+        sankrit: "sans"
       },
       god: ""
     },
     {
       mantra: {
         english: "Shri Ganpati Atharvashirsha",
-        hindi: "श्री गणपति अथर्वशीर्षा"
+        hindi: "श्री गणपति अथर्वशीर्षा",
+        sankrit: "sans"
       },
       god: "Ganesh Ji"
     },
     {
       mantra: {
         english: "Shri Ramrksha stotra",
-        hindi: "श्री रामरक्षा स्तोत्र"
+        hindi: "श्री रामरक्षा स्तोत्र",
+        sankrit: "sans"
       },
       god: "Shri Ram"
     },
     {
       mantra: {
         english: "Maruti stotra",
-        hindi: "मारुति स्तोत्र"
+        hindi: "मारुति स्तोत्र",
+        sankrit: "sans"
       },
       god: "Hanuman Ji"
     },
     {
       mantra: {
         english: "Madhurashtakam",
-        hindi: "मधुराष्टकम्"
+        hindi: "मधुराष्टकम्",
+        sankrit: "sans"
       },
       god: ""
     },
     {
       mantra: {
         english: "Shri Ram Stuti",
-        hindi: "श्री राम स्तुति"
+        hindi: "श्री राम स्तुति",
+        sankrit: "sans"
       },
       god: "Shri Ram"
     },
     {
       mantra: {
         english: "Bajrang Baan",
-        hindi: "बजरंग बाण"
+        hindi: "बजरंग बाण",
+        sankrit: "sans"
       },
       god: "Hanuman Ji"
     },
     {
       mantra: {
         english: "Hanuman Ji Aarti",
-        hindi: "हनुमान जी की आरती"
+        hindi: "हनुमान जी की आरती",
+        sankrit: "sans"
       },
       god: "Hanuman Ji"
     },
     {
       mantra: {
         english: "Sankat Mochan Hanumanashtak",
-        hindi: "संकट मोचन हनुमानाष्टक"
+        hindi: "संकट मोचन हनुमानाष्टक",
+        sankrit: "sans"
       },
       god: "Hanuman Ji"
     }
@@ -135,6 +147,13 @@ const Devotional: React.FC = () => {
       termsAndConditions: "नियम और शर्तें",
       language: "भाषा",
     },
+    sanskrit: {
+      devName: "धार्मिक",
+      all: "सभी",
+      ContentName: "रेफर और कमाएं",
+      termsAndConditions: "नियम और शर्तें",
+      language: "भाषा",
+    },
     // Add strings for other languages
   };
 
@@ -147,7 +166,7 @@ const Devotional: React.FC = () => {
   return (
     <IonPage>
       <Header title={strings.devName} />
-      <IonContent>
+      <Common>
         <IonRow className="ion-align-items-center">
           <IonCol size="8">
             <IonSearchbar value={searchText} onIonInput={handleSearchTextChange} />
@@ -192,7 +211,8 @@ const Devotional: React.FC = () => {
             </IonRouterLink>
           ))}
         </IonList>
-      </IonContent>
+      </Common>
+      <TabBar />
     </IonPage>
   );
 };
